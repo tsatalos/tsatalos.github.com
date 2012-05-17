@@ -1,0 +1,99 @@
+<html>
+<head> 
+<title>Odysseas Tsatalos</title>
+<style>
+
+.fill {
+    width: 100%;
+    height: 100%;
+}
+
+table {
+    border-collapse: collapse;
+}
+th, td {
+    padding: 0;
+}
+    
+body {
+    font-family: Sans-Serif;
+}
+
+.sidebar {
+}
+
+.content {
+}
+
+.sidebar .block {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.sidebar .header {
+    font-weight: bold;
+}
+
+.content .title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+</style>
+
+</head> 
+<body>
+<script src="/js/jquery.js"></script>
+<script src="/js/myutil.js"></script>
+
+<script>
+<!-- Acknowledgments -->
+<!-- this site is using the design, layout and code of Greg Little's home page at glittle.org -->
+
+var links = {
+    "github" : "https://github.com/ogt",
+    "linkedin" : "http://www.linkedin.com/pub/odysseas-tsatalos/0/80a/9aa",
+    "+google" : "https://plus.google.com/109694920571648066264",
+    "delicious" : "http://delicious.com/odysseas",
+    "livejournal" : "http://odysseas.livejournal.com/",
+    "dblp" : "http://www.informatik.uni-trier.de/~ley/db/indices/a-tree/t/Tsatalos:Odysseas_G=.html",
+    "freebase" : "http://www.freebase.com/view/en/odysseas_tsatalos",
+}
+
+function loadSidebar() {
+    var h = $('.sidebar')
+    h.append($('<div class="me block"/>').append($('<img/>').attr('src', 'me.jpeg').attr('width', '90px')))
+    
+    var d = $('<div class="links block"/>')
+    d.append($('<div class="header"/>').text("links"))
+    unsortedKeys(links).forEach(function (k) {
+        v = links[k]
+        if (!k.match(/Display$/)) {
+            d.append($('<div/>').append($('<a/>').attr('href', v).text(k)))
+        }
+    })
+    h.append(d)
+}
+
+$(function () {
+    loadSidebar()
+})
+
+</script>
+
+<table class="fill">
+    <tr>
+        <td valign="top" width="200px">
+            <div class="sidebar"></div>
+        </td>
+        <td valign="top">
+            <div class="content fill"></div>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
+
