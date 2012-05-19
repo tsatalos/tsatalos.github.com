@@ -50,3 +50,17 @@ function unsortedKeys(hash) {
 
 function sortedKeys(hash) { return unsortedKeys(hash).sort() }
 
+function getFragment(url) {
+    if (url === undefined) {
+        url = window.location.href
+    }
+    var m = url.match(/#(.*)/)
+    return m ? m[1] : ""
+}
+
+function setFragment(frag) {
+    url = window.location.href
+    url = url.replace(/(#[^#]*)?$/, '#' + frag)
+    window.location.href = url
+}
+

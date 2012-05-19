@@ -48,6 +48,7 @@ body {
 <body>
 <script src="/js/jquery.js"></script>
 <script src="/js/myutil.js"></script>
+<script src="/js/hashchange.js"></script>
 
 <script>
 <!-- Acknowledgments -->
@@ -63,6 +64,47 @@ var links = {
     "freebase" : "http://www.freebase.com/view/en/odysseas_tsatalos",
 }
 
+function listItemDisplay(list, listName) {
+  var d = $('<div/>')
+  d.append('<div class="title">'+listName+'</div>')
+  unsortedKeys(list).forEach(function(item) {
+    d.append($('<div/>').append($('<a/>').attr('href', list[item]).text(item)))
+  })
+  return d
+}
+
+var lists = {
+    "projects" : {
+      "moving word" : "http://moving_word.github.com",
+    },
+    "favorite coffeeshops" : {
+      "neto" : "http://www.netocaffe.com/",
+      "epi": "http://www.cafeepi.com/", 
+      "la tartine" : "http://www.yelp.com/biz/cafe-la-tartine-redwood-city",
+      "pamplamousse" : "http://www.pamplemoussecakes.com/",
+      "boronne" : "http://www.cafeborrone.com/",
+      "venetia" : "http://www.cafevenetia.com/",
+      "coupa" : "http://www.coupacafe.com",
+      "crema" : "https://www.facebook.com/CremaCoffeeCo",
+      "almaden coffee roasting company" : "https://www.facebook.com/ARCcoffee",
+      "los gatos coffee roasting company" : "http://www.lgcrc.com/",
+    }
+      
+}
+
+function loadFragment(name) {
+    if (name != getFragment()) {
+        setFragment(name)
+        return
+    }
+    name = name.replace(/-/g, ' ')
+    var d = lists[name]
+    if (d) {
+      $('.content').empty().append(listItemDisplay(d, name))
+    }
+}
+    
+
 function loadSidebar() {
     var h = $('.sidebar')
     h.append($('<div class="me block"/>').append($('<img/>').attr('src', 'me.jpeg').attr('width', '90px')))
@@ -76,6 +118,17 @@ function loadSidebar() {
         }
     })
     h.append(d)
+
+    var d = $('<div class="lists block"/>')
+    d.append($('<div class="header"/>').text("lists"))
+    unsortedKeys(lists).forEach(function (e) {
+        d.append($('<div/>').append($('<a/>').attr('href', '#').text(e).click(function () {
+            loadFragment(e.replace(/ /g, '-'))
+            return false
+        })))
+    })
+    h.append(d)
+
 }
 
 $(function () {
