@@ -133,6 +133,9 @@ function loadSidebar() {
 
 $(function () {
     loadSidebar()
+    $(window).hashchange(function () {
+        loadFragment(getFragment())
+    }).hashchange()
 })
 
 </script>
