@@ -10,6 +10,7 @@ from [here](http://data.worldbank.org/indicator/all)  in the data warehouse unde
 The data could be used for anything from understanding trends, forecasting growth, or interesting blog posts.
 
 Here is a query that shows some of the data:
+
 <pre>
     select
       bb."Country Name" as country,
