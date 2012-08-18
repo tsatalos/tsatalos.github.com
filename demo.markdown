@@ -11,9 +11,8 @@ The data could be used for anything from understanding trends, forecasting growt
 
 Here is a query that shows some of the data:
 
-<pre>
-
-    select
+```sql
+    create temp view wdi_example as select
       bb."Country Name" as country,
       round(cast(bb."2010" as numeric)) as broadband_users,
       round(cast(internet."2010" as numeric)) as internet_users,
@@ -30,7 +29,8 @@ Here is a query that shows some of the data:
       and population."Indicator Code" = 'SP.POP.TOTL'
     order by population desc
     ;
-
+```
+<pre>
     odw=> select * from wdi_example order by population desc;
 
                        country                     | broadband_users | internet_users | population 
@@ -83,7 +83,7 @@ In general, you would open up the series spreadsheet or the world bank url menti
 If you want to use multiple indicators the structure of the file will force you to do a join for each indicator..  Non ideal but necessary - thats why I created a temp view in the example above to make the query more readable
 Here is the process to update it with a fresh version of the WDI data - probably we would do that yearly
 
-<pre>
+```sh
 
     > mkdir /tmp/wdi; cd /tmp/wdi
     > curl -O http://databank.worldbank.org/databank/download/WDIandGDF_csv.zip
@@ -98,8 +98,7 @@ Here is the process to update it with a fresh version of the WDI data - probably
       nl=$'\n'
       echo "set client_encoding to 'latin1';$nl \copy wdi.$ff from '$f' CSV HEADER;" |psql -h dbs16 -p 12000  -U odw -d odw -f - 
     done
-
-</pre>
+```
 
 Scripts used
 
