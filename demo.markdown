@@ -31,16 +31,10 @@ Here is a query that shows some of the data:
     order by population desc
     ;
 
-</pre>
-
-<pre>
     odw=> select * from wdi_example order by population desc;
 
                        country                     | broadband_users | internet_users | population 
     -----------------------------------------------+-----------------+----------------+------------
-</pre>
-
-<pre>
     Not classified                                 |                 |                |           
     World                                          |       529552633 |     2038625951 | 6894377794
     Low & middle income                            |       231326829 |     1211559964 | 5766461466
@@ -50,6 +44,9 @@ Here is a query that shows some of the data:
     East Asia & Pacific (all income levels)        |       205613769 |      749045994 | 2201613485
     East Asia & Pacific (developing only)          |       139030021 |      563285528 | 1961101773
     South Asia                                     |        11893861 |      132800217 | 1632939098
+</pre>
+
+<pre>
     China                                          |       126337000 |      460077957 | 1337825000
     OECD members                                   |       304879562 |      844430192 | 1237234841
     India                                          |        10990000 |       91846075 | 1224614327
