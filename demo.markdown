@@ -11,6 +11,7 @@ The data could be used for anything from understanding trends, forecasting growt
 
 Here is a query that shows some of the data:
 
+<pre>
 
     select
       bb."Country Name" as country,
@@ -72,6 +73,8 @@ Here is a query that shows some of the data:
      Russian Federation                             |        15700000 |       61472011 |  141920000
      Japan                                          |        34044729 |       98951089 |  127450459
      Mexico                                         |        11325022 |       35217856 |  113423047
+
+</pre>
 
 
 The metadata (i.e. the list of series, countries together with their description) is also viewable here [Countries](https://docs.google.com/a/odesk.com/spreadsheet/ccc?key=0Asr9ZuzplUMbdDktbVBhODFYWEM4VFl1TFRxNkhYSVE#gid=0) , [Series](https://docs.google.com/a/odesk.com/spreadsheet/ccc?key=0Asr9ZuzplUMbdHJvRkVTRkY4OTNibmZac0dWWGhlaWc#gid=0)
