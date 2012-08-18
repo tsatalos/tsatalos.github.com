@@ -34,45 +34,45 @@ Here is a query that shows some of the data:
     odw=> select * from wdi_example order by population desc;
 
                        country                     | broadband_users | internet_users | population 
-    ------------------------------------------------+-----------------+----------------+------------
-     Not classified                                 |                 |                |           
-     World                                          |       529552633 |     2038625951 | 6894377794
-     Low & middle income                            |       231326829 |     1211559964 | 5766461466
-     Middle income                                  |       230963174 |     1171514374 | 4966657601
-     Lower middle income                            |        26129949 |      334184408 | 2494159560
-     Upper middle income                            |       204833225 |      837329966 | 2472498041
-     East Asia & Pacific (all income levels)        |       205613769 |      749045994 | 2201613485
-     East Asia & Pacific (developing only)          |       139030021 |      563285528 | 1961101773
-     South Asia                                     |        11893861 |      132800217 | 1632939098
-     China                                          |       126337000 |      460077957 | 1337825000
-     OECD members                                   |       304879562 |      844430192 | 1237234841
-     India                                          |        10990000 |       91846075 | 1224614327
-     High income                                    |       298225804 |      827065987 | 1127916328
-     High income: OECD                              |       284686258 |      772541200 | 1033945781
-     Europe & Central Asia (all income levels)      |       167104549 |      512371917 |  891039428
-     Sub-Saharan Africa (all income levels)         |         1477152 |       89458998 |  853931672
-     Sub-Saharan Africa (developing only)           |         1475966 |       89416974 |  853231271
-     Least developed countries: UN classification   |          699160 |       35242769 |  825210584
-     Low income                                     |          363655 |       40045590 |  799803865
-     Heavily indebted poor countries (HIPC)         |          679731 |       28981478 |  620267812
-     Latin America & Caribbean (all income levels)  |        38534602 |      200827202 |  588757676
-     Latin America & Caribbean (developing only)    |        37695393 |      198016893 |  582501932
-     European Union                                 |       130004397 |      355546517 |  502302566
-     Europe & Central Asia (developing only)        |        36772909 |      158676575 |  405670230
-     Middle East & North Africa (all income levels) |         9026704 |       96625274 |  382556328
-     Arab World                                     |         6716509 |       81902398 |  347672135
-     North America                                  |        95901996 |      257496348 |  343540107
-     Euro area                                      |        91720222 |      236149428 |  331943805
-     Middle East & North Africa (developing only)   |         4458679 |       69363777 |  331017162
-     United States                                  |        85723155 |      229684122 |  309349689
-     Indonesia                                      |         1900300 |       23747223 |  239870937
-     Brazil                                         |        13266310 |       79245740 |  194946470
-     Pakistan                                       |          531787 |       29128970 |  173593383
-     Nigeria                                        |           99108 |       45039711 |  158423182
-     Bangladesh                                     |           60000 |        5501609 |  148692131
-     Russian Federation                             |        15700000 |       61472011 |  141920000
-     Japan                                          |        34044729 |       98951089 |  127450459
-     Mexico                                         |        11325022 |       35217856 |  113423047
+    -----------------------------------------------+-----------------+----------------+------------
+    Not classified                                 |                 |                |           
+    World                                          |       529552633 |     2038625951 | 6894377794
+    Low & middle income                            |       231326829 |     1211559964 | 5766461466
+    Middle income                                  |       230963174 |     1171514374 | 4966657601
+    Lower middle income                            |        26129949 |      334184408 | 2494159560
+    Upper middle income                            |       204833225 |      837329966 | 2472498041
+    East Asia & Pacific (all income levels)        |       205613769 |      749045994 | 2201613485
+    East Asia & Pacific (developing only)          |       139030021 |      563285528 | 1961101773
+    South Asia                                     |        11893861 |      132800217 | 1632939098
+    China                                          |       126337000 |      460077957 | 1337825000
+    OECD members                                   |       304879562 |      844430192 | 1237234841
+    India                                          |        10990000 |       91846075 | 1224614327
+    High income                                    |       298225804 |      827065987 | 1127916328
+    High income: OECD                              |       284686258 |      772541200 | 1033945781
+    Europe & Central Asia (all income levels)      |       167104549 |      512371917 |  891039428
+    Sub-Saharan Africa (all income levels)         |         1477152 |       89458998 |  853931672
+    Sub-Saharan Africa (developing only)           |         1475966 |       89416974 |  853231271
+    Least developed countries: UN classification   |          699160 |       35242769 |  825210584
+    Low income                                     |          363655 |       40045590 |  799803865
+    Heavily indebted poor countries (HIPC)         |          679731 |       28981478 |  620267812
+    Latin America & Caribbean (all income levels)  |        38534602 |      200827202 |  588757676
+    Latin America & Caribbean (developing only)    |        37695393 |      198016893 |  582501932
+    European Union                                 |       130004397 |      355546517 |  502302566
+    Europe & Central Asia (developing only)        |        36772909 |      158676575 |  405670230
+    Middle East & North Africa (all income levels) |         9026704 |       96625274 |  382556328
+    Arab World                                     |         6716509 |       81902398 |  347672135
+    North America                                  |        95901996 |      257496348 |  343540107
+    Euro area                                      |        91720222 |      236149428 |  331943805
+    Middle East & North Africa (developing only)   |         4458679 |       69363777 |  331017162
+    United States                                  |        85723155 |      229684122 |  309349689
+    Indonesia                                      |         1900300 |       23747223 |  239870937
+    Brazil                                         |        13266310 |       79245740 |  194946470
+    Pakistan                                       |          531787 |       29128970 |  173593383
+    Nigeria                                        |           99108 |       45039711 |  158423182
+    Bangladesh                                     |           60000 |        5501609 |  148692131
+    Russian Federation                             |        15700000 |       61472011 |  141920000
+    Japan                                          |        34044729 |       98951089 |  127450459
+    Mexico                                         |        11325022 |       35217856 |  113423047
 
 </pre>
 
