@@ -36,10 +36,10 @@ Here is a query that shows some of the data:
                        country                     | broadband_users | internet_users | population 
     -----------------------------------------------+-----------------+----------------+------------
     Not classified                                 |                 |                |           
+    World                                          |       529552633 |     2038625951 | 6894377794
 </pre>
 
 <pre>
-    World                                          |       529552633 |     2038625951 | 6894377794
     Low & middle income                            |       231326829 |     1211559964 | 5766461466
     Middle income                                  |       230963174 |     1171514374 | 4966657601
     Lower middle income                            |        26129949 |      334184408 | 2494159560
