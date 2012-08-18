@@ -10,7 +10,7 @@ from [here](http://data.worldbank.org/indicator/all)  in the data warehouse unde
 The data could be used for anything from understanding trends, forecasting growth, or interesting blog posts.
 
 Here is a query that shows some of the data:
-
+<pre>
     select
       bb."Country Name" as country,
       round(cast(bb."2010" as numeric)) as broadband_users,
@@ -71,46 +71,15 @@ Here is a query that shows some of the data:
      Russian Federation                             |        15700000 |       61472011 |  141920000
      Japan                                          |        34044729 |       98951089 |  127450459
      Mexico                                         |        11325022 |       35217856 |  113423047
-
-and here how we could use some data in a query to show for the countries with most client billings what is the client penetration per 100K of broadband/internet users
-
-
-    create or replace temp view wdi.example as select
-      bb."Country Name" as country,
-      round(cast(bb."2010" as numeric)) as broadband_users,
-      round(cast(internet."2010" as numeric)) as internet_users,
-      round(cast(population."2010" as numeric)) as population
-    from
-      wdi.data bb,
-      wdi.data internet,
-      wdi.data population
-    where
-      bb."Country Name" = internet."Country Name"
-      and bb."Country Name" = population."Country Name"
-      and bb."Indicator Code" = 'IT.NET.BBND'
-      and internet."Indicator Code" = 'IT.NET.USER'
-      and population."Indicator Code" = 'SP.POP.TOTL'
-    order by population desc
-    ;
-    
-    select
-      c."Country",
-      round(sum( case when dd.yw = '2011-W33' then ah.total_charge else 0 end)) as W33_charge_2011,
-      round(sum( case when dd.yw = '2012-W33' then ah.total_charge else 0 end)) as W33_charge_2012 ,
-      round(100* sum( case when dd.yw = '2012-W33' then ah.total_charge else 0 end) / (0.1 + sum(case when dd.yw = '2011-W33' then ah.total_charge else 0 end)) - 100) as percent_growth_2012,
-      round(100000*( ( count( distinct case when dd.yw = '2012-W33' then ah.contractor else null end) + count( distinct case when dd.yw = '2012-W33' then ah.employer else null end))/v.broadband_users) as clients_per100000bb,
-    from agg.a_assignment ah join "oDesk DB".date_dim dd on dd.date = ah.date, "oDesk DB"."Companies" c, wdi.example v
-    where c."Record ID#" = ah.employer and c."Country" = v.country
-      and ah.include_in_stats
-    group by c."Country",v.internet_users,v.broadband_users
-    having round(sum( case when dd.yw = '2012-W33' then ah.total_charge else 0 end))  > 3000
-    order by W33_charge_2012 desc;
+</pre>
 
 The metadata (i.e. the list of series, countries together with their description) is also viewable here [Countries](https://docs.google.com/a/odesk.com/spreadsheet/ccc?key=0Asr9ZuzplUMbdDktbVBhODFYWEM4VFl1TFRxNkhYSVE#gid=0) , [Series](https://docs.google.com/a/odesk.com/spreadsheet/ccc?key=0Asr9ZuzplUMbdHJvRkVTRkY4OTNibmZac0dWWGhlaWc#gid=0)
 In general, you would open up the series spreadsheet or the world bank url mentioned in the beginning search to find based on the description the relevant indicator find its code (in the web page the code is in the link) and then issue the query like above.
 
 If you want to use multiple indicators the structure of the file will force you to do a join for each indicator..  Non ideal but necessary - thats why I created a temp view in the example above to make the query more readable
 Here is the process to update it with a fresh version of the WDI data - probably we would do that yearly
+
+<pre>
 
     > mkdir /tmp/wdi; cd /tmp/wdi
     > curl -O http://databank.worldbank.org/databank/download/WDIandGDF_csv.zip
@@ -126,8 +95,11 @@ Here is the process to update it with a fresh version of the WDI data - probably
       echo "set client_encoding to 'latin1';$nl \copy wdi.$ff from '$f' CSV HEADER;" |psql -h dbs16 -p 12000  -U odw -d odw -f - 
     done
 
+</pre>
+
 Scripts used
 
+<pre>
     csv_db_import.py from http://furius.ca/pubcode/pub/conf/bin/csv-db-import.html   #slightly modified to allow for schema setting/create table stmt only
-
+</pre>
 
