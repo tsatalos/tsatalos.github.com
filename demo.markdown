@@ -31,7 +31,10 @@ Here is a query that shows some of the data:
     order by population desc
     ;
 
-    odw select * from wdi_example order by population desc;
+</pre>
+
+<pre>
+    odw=> select * from wdi_example order by population desc;
 
                        country                     | broadband_users | internet_users | population 
     -----------------------------------------------+-----------------+----------------+------------
