@@ -99,22 +99,29 @@ Here is the process to update it with a fresh version of the WDI data - probably
 
 <pre>
 
+    > # zip file contains csvs in place, so we need to put things ourselves in a directory
     > mkdir /tmp/wdi; cd /tmp/wdi
+    > # -O creates the file use the url's last part as name
     > curl -O http://databank.worldbank.org/databank/download/WDIandGDF_csv.zip
     > unzip WDIandGDF_csv.zip
     > for f in *.csv
     > do 
-      oldf=f
-      f=`echo $oldf|sed 's/WDI_GDF_//'`
-      mv $oldf $f
-      python ~/scripts/csv_db_import.py -r 0 -c -x -D odw -U ... -p ... -s wdi -V 12000 -H dbs16 $f
-      ff=`basename $f .csv`
-      nl=$'\n'
-      echo "set client_encoding to 'latin1';$nl \copy wdi.$ff from '$f' CSV HEADER;" |psql -h dbhostname -p portname  -U username -d dbname -f - 
-    done
+    >   # take out the name prefix from the csv files - we will rely on the file names for table names
+    >   oldf=f
+    >   f=`echo $oldf|sed 's/WDI_GDF_//'`
+    >   mv $oldf $f
+    > # some option explanations here : -r 0 asks to read all rows to determine type, 
+    > # -c asks to use first row as header, -x asks to only create the tables and not import the data
+    >   ~/scripts/csv_db_import.py -r 0 -c -x -D dbname -U username -p password -s wdi -V dbport -H dbhostname $f
+    >   ff=`basename $f .csv`
+    >   nl=$'\n'
+    > # had to change the client encoding some of the footnotes use accented chars and cause postgres errors otherwise
+    > # I use the \copy instead of the sql copy because the later has user restrictions 
+    >   echo "set client_encoding to 'latin1';$nl \copy wdi.$ff from '$f' CSV HEADER;" |psql -h dbhostname -p dbport  -U username -d dbname -f - 
+    > done
 </pre>
 
-The psql parameters above dbhostname, portname etc... are just placeholders you will need to replace it with whatever you have. That line is the only postgresql specific line - to do the same in mysql you may need to change a bit the copy stmt. Let me know if you do so and I will include any mysql or other db instuctions here as well.
+The psql parameters above dbhostname, dbport etc... are just placeholders you will need to replace it with whatever you have. That line is the only postgresql specific line - to do the same in mysql you may need to change a bit the copy stmt. Let me know if you do so and I will include any mysql or other db instuctions here as well.
 
 I am using a script I found that produces the create table stmt automatically from the csv header and the subsequent column width/value types... It does a pretty good job. I am not using the scripts own capability for data import because it fails for "large" data sets like the ones we have - plus it takes very long - one insert per line... the copy stmt is much much faster.
 
