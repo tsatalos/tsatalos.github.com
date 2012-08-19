@@ -16,7 +16,7 @@ Until last week that is.
 
 Here is a query that shows some of the data:
 
-```sql
+<pre>
     create temp view wdi_example as select
       bb."Country Name" as country,
       round(cast(bb."2010" as numeric)) as broadband_users,
@@ -34,8 +34,6 @@ Here is a query that shows some of the data:
       and population."Indicator Code" = 'SP.POP.TOTL'
     order by population desc
     ;
-```
-<pre>
     odw=> select * from wdi_example order by population desc;
 
                        country                     | broadband_users | internet_users | population 
@@ -101,7 +99,7 @@ As for countries this are a bit messier there - not due to world bank's faults b
 Again, I may be restating the obvious here, If you want to use multiple indicators in your query, you will need to do a join for each indicator..  Non ideal but necessary - thats why I created a temp view in the example above to make the query more readable
 Here is the process to update it with a fresh version of the WDI data - probably you should do that yearly
 
-```sh
+<pre>
 
     > mkdir /tmp/wdi; cd /tmp/wdi
     > curl -O http://databank.worldbank.org/databank/download/WDIandGDF_csv.zip
@@ -116,7 +114,8 @@ Here is the process to update it with a fresh version of the WDI data - probably
       nl=$'\n'
       echo "set client_encoding to 'latin1';$nl \copy wdi.$ff from '$f' CSV HEADER;" |psql -h dbhostname -p portname  -U username -d dbname -f - 
     done
-```
+</pre>
+
 The psql parameters above dbhostname, portname etc... are just placeholders you will need to replace it with whatever you have. That line is the only postgresql specific line - to do the same in mysql you may need to change a bit the copy stmt. Let me know if you do so and I will include any mysql or other db instuctions here as well.
 
 I am using a script I found that produces the create table stmt automatically from the csv header and the subsequent column width/value types... It does a pretty good job. I am not using the scripts own capability for data import because it fails for "large" data sets like the ones we have - plus it takes very long - one insert per line... the copy stmt is much much faster.
