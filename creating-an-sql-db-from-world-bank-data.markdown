@@ -1,13 +1,18 @@
 ---
 title: This will be used as the title-tag of the page head
 ---
-
-We added the World Bank "World Development Indicators" 
+I just finished We added the World Bank "World Development Indicators" 
 from [here](http://data.worldbank.org/indicator/all)  in the data warehouse under schema : wdi
 
-( I would advise anyone that is doing research/analysis to take a closer look at the indicators above - its quite an unbelievable trove of information. from market cap of country's stock to number of PCs, to $ transfers from abroad, unemployment rate, number of people finishing university…. etc etc
+I would advise anyone that is doing research/analysis to take a closer look at the 
+[world bank indicators](http://data.worldbank.org/indicator/all)
+They represent a very juicy subset of the [UNdata](data.un.org) 
+from market cap of country's stock to number of PCs, to $ transfers from abroad, unemployment rate, number of people finishing university…. etc etc
+On top of that the particular dataset made easily available in its entirety directly from the world bank as an excel or set of csv files - contracry to the UNdata which opts to keep the db "hidden" and expose only an exploring interface (there is just one [third party service](http://www.undata-api.org) that offers a restricted API to UNdata ).
 
-The data could be used for anything from understanding trends, forecasting growth, or interesting blog posts.
+From my side - I always would need some piece of that database - but everytime it wasn't worth the trouble to get the data in my own database in a way that I can query/filter/display as I want.
+
+Until last week that is.
 
 Here is a query that shows some of the data:
 
@@ -76,12 +81,25 @@ Here is a query that shows some of the data:
 
 </pre>
 
+Note that the DB is in "attribute-value" form, ie you won't find a very wide table with one row per country and a column per indicator  (there are too many indicators for that), but instead you will find a row for each country/indicator combination (250 country rows x 1200 indicators = approximately 300K rows in the main Data file). 
+This is a bit futrher complicated that each such record contains a column for each of the years - ranging from the 70s to now - which does give you extra info if you wanted to do sth with historical trends - but if you don't and you just need let say the country population for each country.... it makes your life quite hrder - given that you don't even know which is the most recent year that the indicator is available for a particular country.
 
-The metadata (i.e. the list of series, countries together with their description) is also viewable here [Countries](https://docs.google.com/a/odesk.com/spreadsheet/ccc?key=0Asr9ZuzplUMbdDktbVBhODFYWEM4VFl1TFRxNkhYSVE#gid=0) , [Series](https://docs.google.com/a/odesk.com/spreadsheet/ccc?key=0Asr9ZuzplUMbdHJvRkVTRkY4OTNibmZac0dWWGhlaWc#gid=0)
-In general, you would open up the series spreadsheet or the world bank url mentioned in the beginning search to find based on the description the relevant indicator find its code (in the web page the code is in the link) and then issue the query like above.
+In the example above I made things simpler by just going a couple years back (2010) to make sure that I can definitely find the indicator - still one cannot assume in general that a value (or even row) exist for a particular country/indicator/year - so the simplistic join query that I have above needs to be replaced with an outer join query instead.
 
-If you want to use multiple indicators the structure of the file will force you to do a join for each indicator..  Non ideal but necessary - thats why I created a temp view in the example above to make the query more readable
-Here is the process to update it with a fresh version of the WDI data - probably we would do that yearly
+There is a country/series table that includes among some other information which is the most recent year that the indicator is available for the particular country. I haven't checked it but ideally the query should consult first that table and use that to fish the right value from the data table to produce the most recent value of an inducator for a particular country.
+
+At some point me or someone else should probably create flattend views that perform the logic described above and expose one such view for each subsection of the world data indicators (e.g. "Agriculture & Rural Development", "Aid Effectiveness", "Climate Change", "Economic Policy & External Debt" etc...  (a single flattened view would be too much even for postgres)
+
+I uploaded two of the small tables (Series - 1200 rows and Countries - 250 rows) to google so you can easily take a look at these datasets as google spreadsheets.
+
+As you can see each has a code, e.g. SP.POP.TOTL and you should use that code in your query.
+To find the code you can go to the [worldbank site](http://data.worldbank.org/indicator/all) search for the indicator you want (e.g. Population), as you can see there are many options, e.g. Urban Population etc. In our case our indicator is called "Population, total", click on it and you will the code as the last part of the URL.
+
+As for countries this are a bit messier there - not due to world bank's faults but every db I know uses a slightly different convention for coding countries. Te countries table has several of those (2-letter-code, 3-letter-code, short name, long name, table name etc etc...). In the event that the "Country Name" that is included in the Data table doesn't suit you, you should be able to join back with the Countries table and gert from the key column that better fits whatever you are using as your country key/code/name.
+
+
+Again, I may be restating the obvious here, If you want to use multiple indicators in your query, you will need to do a join for each indicator..  Non ideal but necessary - thats why I created a temp view in the example above to make the query more readable
+Here is the process to update it with a fresh version of the WDI data - probably you should do that yearly
 
 ```sh
 
@@ -96,11 +114,12 @@ Here is the process to update it with a fresh version of the WDI data - probably
       python ~/scripts/csv_db_import.py -r 0 -c -x -D odw -U ... -p ... -s wdi -V 12000 -H dbs16 $f
       ff=`basename $f .csv`
       nl=$'\n'
-      echo "set client_encoding to 'latin1';$nl \copy wdi.$ff from '$f' CSV HEADER;" |psql -h dbs16 -p 12000  -U odw -d odw -f - 
+      echo "set client_encoding to 'latin1';$nl \copy wdi.$ff from '$f' CSV HEADER;" |psql -h dbhostname -p portname  -U username -d dbname -f - 
     done
 ```
+The psql parameters above dbhostname, portname etc... are just placeholders you will need to replace it with whatever you have. That line is the only postgresql specific line - to do the same in mysql you may need to change a bit the copy stmt. Let me know if you do so and I will include any mysql or other db instuctions here as well.
 
-Scripts used
+I am using a script I found that produces the create table stmt automatically from the csv header and the subsequent column width/value types... It does a pretty good job. I am not using the scripts own capability for data import because it fails for "large" data sets like the ones we have - plus it takes very long - one insert per line... the copy stmt is much much faster.
 
 <pre>
     csv_db_import.py from http://furius.ca/pubcode/pub/conf/bin/csv-db-import.html   #slightly modified to allow for schema setting/create table stmt only
