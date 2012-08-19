@@ -8,7 +8,7 @@ They represent a very juicy subset of the [UNdata](http://data.un.org)
 from market cap of country's stock to number of PCs, to $ transfers from abroad, unemployment rate, number of people finishing university…. etc etc
 On top of that the particular dataset made easily available in its entirety directly from the world bank as an excel or set of csv files - contracry to the UNdata which opts to keep the db "hidden" and expose only an exploring interface (there is just one [third party service](http://www.undata-api.org) that offers a restricted API to UNdata ).
 
-From my side - I always would need some piece of that database - but everytime it wasn't worth the trouble to get the data in my own database in a way that I can query/filter/display as I want.
+From my side - I always was in need of some slice of that database - but everytime it wasn't worth the trouble to get the data in my own database in a way that I can query/filter/display as I want.
 
 Until last week that is.
 
@@ -77,7 +77,8 @@ Here is a query that shows some of the data:
 
 </pre>
 
-Note that the DB is in "attribute-value" form, ie you won't find a very wide table with one row per country and a column per indicator  (there are too many indicators for that), but instead you will find a row for each country/indicator combination (250 country rows x 1200 indicators = approximately 300K rows in the main Data file). 
+Note that the data includes as countries certain useful aggregations - that are not countries themselves.
+Also note that the DB is in "attribute-value" form, ie you won't find a very wide table with one row per country and a column per indicator  (there are too many indicators for that), but instead you will find a row for each country/indicator combination (250 country rows x 1200 indicators = approximately 300K rows in the main Data file). 
 This is a bit futrher complicated that each such record contains a column for each of the years - ranging from the 70s to now - which does give you extra info if you wanted to do sth with historical trends - but if you don't and you just need let say the country population for each country.... it makes your life quite hrder - given that you don't even know which is the most recent year that the indicator is available for a particular country.
 
 In the example above I made things simpler by just going a couple years back (2010) to make sure that I can definitely find the indicator - still one cannot assume in general that a value (or even row) exist for a particular country/indicator/year - so the simplistic join query that I have above needs to be replaced with an outer join query instead.
@@ -99,7 +100,7 @@ Here is the process to update it with a fresh version of the WDI data - probably
 
 <pre>
 
-    > # zip file contains csvs in place, so we need to put things ourselves in a directory
+    > # zip file contains csvs at top level, so we need to put things ourselves in a directory
     > mkdir /tmp/wdi; cd /tmp/wdi
     > # -O creates the file use the url's last part as name
     > curl -O http://databank.worldbank.org/databank/download/WDIandGDF_csv.zip
