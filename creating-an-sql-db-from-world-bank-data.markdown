@@ -1,12 +1,10 @@
 ---
 title: This will be used as the title-tag of the page head
 ---
-I just finished We added the World Bank "World Development Indicators" 
-from [here](http://data.worldbank.org/indicator/all)  in the data warehouse under schema : wdi
 
 I would advise anyone that is doing research/analysis to take a closer look at the 
 [world bank indicators](http://data.worldbank.org/indicator/all)
-They represent a very juicy subset of the [UNdata](data.un.org) 
+They represent a very juicy subset of the [UNdata](http://data.un.org) 
 from market cap of country's stock to number of PCs, to $ transfers from abroad, unemployment rate, number of people finishing university…. etc etc
 On top of that the particular dataset made easily available in its entirety directly from the world bank as an excel or set of csv files - contracry to the UNdata which opts to keep the db "hidden" and expose only an exploring interface (there is just one [third party service](http://www.undata-api.org) that offers a restricted API to UNdata ).
 
