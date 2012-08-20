@@ -91,8 +91,7 @@ At some point me or someone else should probably create flattend views that perf
 
 I uploaded two of the small tables ([Series](https://docs.google.com/spreadsheet/ccc?key=0AuEZc8NNSRlzdE5ZcTlkYnNyWUdmRXc4T214czlrZWc) - 1200 rows and [Countries](https://docs.google.com/spreadsheet/ccc?key=0AuEZc8NNSRlzdExya1Z4RzhiTVlPVU52R3dRWkJyNmc) - 250 rows to google so you can easily take a look at these datasets as google spreadsheets.
 
-As you can see each has a code, e.g. SP.POP.TOTL and you should use that code in your query.
-To find the code you can go to the [worldbank site](http://data.worldbank.org/indicator/all) search for the indicator you want (e.g. Population), as you can see there are many options, e.g. Urban Population etc. In our case our indicator is called "Population, total", click on it and you will the code as the last part of the URL.
+To find the code for each indicator you can go to the [worldbank site](http://data.worldbank.org/indicator/all) search for the indicator you want (e.g. Population), as you can see there are many options, e.g. Urban Population etc. In our case our indicator is called "Population, total", click on it and you will the code as the last part of the URL : http://data.worldbank.org/indicator/SP.POP.TOTL, ie the code is SP.POP.TOTL  . 
 
 As for countries this are a bit messier there - not due to world bank's faults but every db I know uses a slightly different convention for coding countries. Te countries table has several of those (2-letter-code, 3-letter-code, short name, long name, table name etc etc...). In the event that the "Country Name" that is included in the Data table doesn't suit you, you should be able to join back with the Countries table and gert from the key column that better fits whatever you are using as your country key/code/name.
 
