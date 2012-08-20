@@ -77,18 +77,19 @@ Here is a query that shows some of the data:
 
 </pre>
 
-Note that the data includes as countries certain useful aggregations - that are not countries themselves.
-Also note that the DB is in "attribute-value" form, ie you won't find a very wide table with one row per country and a column per indicator  (there are too many indicators for that), but instead you will find a row for each country/indicator combination (250 country rows x 1200 indicators = approximately 300K rows in the main Data table). 
-This gets futrher complicated by the fact that each record contains a column for each of the years - ranging from the 70s to now. All this extra inforation could be used for historical trend analysis but it makes things harder if you just want to get the most recent value of the indicator by country - thats what I typically need for examplei - a country population or similar country metrics.
-On top of that not all indicators are available for all countries and even in the case there are not all countries make the indicators available in all years.
+Note that the data includes as countries certain useful aggregations like "middle income", or "world" - that are not countries themselves.
 
-In the example above I made things simpler by just going a couple years back (2010) to make sure that I can definitely find the indicator - still one cannot assume in general that a value (or even row) exist for a particular country/indicator/year - so the simplistic join query that I have above needs to be replaced with an outer join query instead.
+Also note that the DB is in "attribute-value" form, ie you won't find a very wide table with one row per country and a column per indicator  (there are too many indicators for that), but instead you will find a row for each country/indicator combination (250 country rows x 1200 indicators = approximately 300K rows in the main Data table). 
+This gets futrher complicated by the fact that each record contains a column for each of the years - ranging from the 70s to now. All this extra inforation could be used for historical trend analysis but it makes things harder if you just want to get the most recent value of the indicator by country - thats what I typically need for example - a country population or similar country metrics.
+On top of that not all indicators are available for all countries and even in the case they are not all countries make the indicators available in all years.
+
+In the example above I made things simpler by just going a couple years back (2010) to make sure that I can definitely find the indicator - still in general the simplistic join query that I have above needs to be replaced with an outer join query instead.
 
 There is a country/series table that includes among some other information which is the most recent year that the indicator is available for the particular country. I haven't checked it but ideally the query should consult first that table and use that to fish the right value from the data table to produce the most recent value of an inducator for a particular country.
 
 At some point me or someone else should probably create flattend views that perform the logic described above and expose one such view for each subsection of the world data indicators (e.g. "Agriculture & Rural Development", "Aid Effectiveness", "Climate Change", "Economic Policy & External Debt" etc...  (a single flattened view would be too much even for postgres)
 
-I uploaded two of the small tables (Series - 1200 rows and Countries - 250 rows) to google so you can easily take a look at these datasets as google spreadsheets.
+I uploaded two of the small tables ([Series](https://docs.google.com/spreadsheet/ccc?key=0AuEZc8NNSRlzdE5ZcTlkYnNyWUdmRXc4T214czlrZWc) - 1200 rows and [Countries](https://docs.google.com/spreadsheet/ccc?key=0AuEZc8NNSRlzdExya1Z4RzhiTVlPVU52R3dRWkJyNmc] - 250 rows) to google so you can easily take a look at these datasets as google spreadsheets.
 
 As you can see each has a code, e.g. SP.POP.TOTL and you should use that code in your query.
 To find the code you can go to the [worldbank site](http://data.worldbank.org/indicator/all) search for the indicator you want (e.g. Population), as you can see there are many options, e.g. Urban Population etc. In our case our indicator is called "Population, total", click on it and you will the code as the last part of the URL.
