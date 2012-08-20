@@ -89,7 +89,7 @@ There is a country/series table that includes among some other information which
 
 At some point me or someone else should probably create flattend views that perform the logic described above and expose one such view for each subsection of the world data indicators (e.g. "Agriculture & Rural Development", "Aid Effectiveness", "Climate Change", "Economic Policy & External Debt" etc...  (a single flattened view would be too much even for postgres)
 
-I uploaded two of the small tables ([Series](https://docs.google.com/spreadsheet/ccc?key=0AuEZc8NNSRlzdE5ZcTlkYnNyWUdmRXc4T214czlrZWc) - 1200 rows and [Countries](https://docs.google.com/spreadsheet/ccc?key=0AuEZc8NNSRlzdExya1Z4RzhiTVlPVU52R3dRWkJyNmc] - 250 rows) to google so you can easily take a look at these datasets as google spreadsheets.
+I uploaded two of the small tables ([Series](https://docs.google.com/spreadsheet/ccc?key=0AuEZc8NNSRlzdE5ZcTlkYnNyWUdmRXc4T214czlrZWc) - 1200 rows and [Countries](https://docs.google.com/spreadsheet/ccc?key=0AuEZc8NNSRlzdExya1Z4RzhiTVlPVU52R3dRWkJyNmc) - 250 rows to google so you can easily take a look at these datasets as google spreadsheets.
 
 As you can see each has a code, e.g. SP.POP.TOTL and you should use that code in your query.
 To find the code you can go to the [worldbank site](http://data.worldbank.org/indicator/all) search for the indicator you want (e.g. Population), as you can see there are many options, e.g. Urban Population etc. In our case our indicator is called "Population, total", click on it and you will the code as the last part of the URL.
