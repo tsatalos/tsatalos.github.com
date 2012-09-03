@@ -55,3 +55,4 @@ I am using a script I found that produces the create table stmt automatically fr
     csv_db_import.py from http://furius.ca/pubcode/pub/conf/bin/csv-db-import.html   #slightly modified to allow for schema setting/create table stmt only
 </pre>
 
+The modified version of the `csv_db_import.py` file is available [here](csv_db_import.py)
