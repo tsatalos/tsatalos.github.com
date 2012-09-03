@@ -113,26 +113,9 @@ Here is the process to update it with a fresh version of the WDI data - probably
     >   oldf=f
     >   f=`echo $oldf|sed 's/WDI_GDF_//'`
     >   mv $oldf $f
-    > # some option explanations here : -r 0 asks to read all rows to determine type, 
-    > # -c asks to use first row as header, -x asks to only create the tables and not import the data (ot addition)
-    > # -s schema to be used within db o/w at top level (ot  addition)
-    >   ~/scripts/csv_db_import.py -r 0 -c -x -D dbname -U username -p password -s wdi -V dbport -H dbhostname $f
-    >   ff=`basename $f .csv`
-    >   nl=$'\n'
-    > # had to change the client encoding some of the footnotes use accented chars and cause postgres errors otherwise
-    > # I use the \copy instead of the sql copy because the later has user restrictions 
-    > # need to create ~/.pgpass with a row  dbhostname:dbport:dbname:username:password to avoid getting interactively asked for pass
-    >   echo "set client_encoding to 'latin1';$nl \copy wdi.$ff from '$f' CSV HEADER;" |psql -h dbhostname -p dbport  -U username -d dbname -f - 
-    > # for mysql it would be instead (latin1 is the default char set for mysql)
-    > #   mysql -u username -e "load data infile '$f' into table wdi.$ff" dbname
     > done
 </pre>
 
-The psql parameters above dbhostname, dbport etc... are just placeholders you will need to replace it with whatever you have. That line is the only postgresql specific line - to do the same in mysql you will need to use the not-yet tested alternative shown in the comment
-
-I am using a script I found that produces the create table stmt automatically from the csv header and the subsequent column width/value types... It does a pretty good job. I am not using the scripts own capability for data import because it fails for "large" data sets like the ones we have - plus it takes very long - one insert per line... the copy stmt is much much faster.
-
-<pre>
-    csv_db_import.py from http://furius.ca/pubcode/pub/conf/bin/csv-db-import.html   #slightly modified to allow for schema setting/create table stmt only
-</pre>
+At this point you have a directory with csv files whose names are appropriate to be used as table names and you can follow the instructions
+about how to create an SQL DB from a set of CSV files given at my earlier [post](2012-08-15-creating-sql-db-from-csv-files.html)
 

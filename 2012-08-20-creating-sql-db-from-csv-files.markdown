@@ -2,11 +2,13 @@
 title: Creating an SQL DB from csv files
 date: 2012-09-01
 ---
+I captured in this post a quick way to go from a set of CSV files to a Database. The idea is that I should be able within a couple commands to get a mysql db with the right schema (tables, fields, types) fully populated with the data from csv files.
+
+The instructions follow:
 
 
 You will need to replace all occurrences of 
 
-* `$SCHEMA` do not use for mysql - for postgres you can use it to avoid putting tables at top level
 * `$DATADIR` the directory with the csv files
 * `$DBHOSTNAME` optional
 * `$DBPORT` optional
@@ -14,6 +16,7 @@ You will need to replace all occurrences of
 * `$USERNAME` set it to root for development use
 * `$DBNAME` the database name
 * `$SCRIPTDIR` the directory where csv_db_import is located
+* `$SCHEMA` do not use for mysql - for postgres you can use it to avoid putting tables at top level
 
 with your own
 
