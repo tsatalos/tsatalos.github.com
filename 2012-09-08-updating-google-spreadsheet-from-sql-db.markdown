@@ -49,7 +49,7 @@ and left for a family thing, keeping an eye on skype to accept any incoming cont
 * At 11:00am Saturday I resumed, connecting over skype with 2 of the hires, spending 30 mins explaining questions to the contractor from Ukraine - who after that took off (equiv to 10pm for him). I continued with the other contractor (US timezone)
 answering questions and working on other stuff on parallel with the skype.
 * At 2pm Saturday approximately after 2hrs of work from that candidate I got the first result. We proceeded in back and forths resolving problems with the delivable (not all types were handled correctly, misunderstandings (lack of headers, no handling of spreadsheet tabs  etc))
-* At 3:30pm Saturday approximately 24 hours after I sat to do the original post and after approximately 4 hrs of my own time and 3-4 hrs of one contractor I had the first outcome I was looking for. ([python script](sheet/db2google.py))
+* At 3:30pm Saturday approximately 24 hours after I sat to do the original post and after approximately 4 hrs of my own time and 3-4 hrs of one contractor I had the first outcome I was looking for. ([python script](sheet/db2google.py.txt))
 * At 8:30am Sunday I had a brief exchange with the Ukranian contractor wher I reminded him of the deadline and resend a msg to the Russian contractor from whom I hadn't received any response yet
 * At 1:30 pm Sunday without any prior contact, the russian contractor message-center-responded me (the job post deadline is Monday) with a zip file containing everything I have ever asked or meant but didn't ask for.
   - perfect use of the ideal python library (gspread) that makes dealing with google spreadsheet a joy.
@@ -58,7 +58,7 @@ answering questions and working on other stuff on parallel with the skype.
   - and never asked anything with regards my own time !
   - self contained with enclosed the gspread library.
   - total lines of code excluding the command line parsing function 20 of which 10 is doing logging - in case you chose the -verbose option!!
-He gave me his skype contact only after he submitted his full answer!. ([python script](sheet/sheet.py), [mysql test](sheet/mysql_test.sql), [pg test](sheet/pg_test), [readme](sheet/README.txt) )
+He gave me his skype contact only after he submitted his full answer!. ([python script](sheet/sheet.py.txt), [mysql test](sheet/mysql_test.sql.txt), [pg test](sheet/pg_test.sql.txt), [readme](sheet/README.txt) )
 
 Summary, I feel very happy and successful in spite of the apparent inbalance between effort invested and return. The reason is that, like always, I have now about 10 things I want to get done with the script 
 for which I would have no time to actually do - while now, all I need to do is ask the contractor and he would gladly do them for me - its his own code - and by now he understands better what I mean/want etc.
