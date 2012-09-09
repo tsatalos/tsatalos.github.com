@@ -63,7 +63,3 @@ He gave me his skype contact only after he submitted his full answer!. ([Contrac
 Summary, I feel very happy and successful in spite of the apparent inbalance between effort invested and return. The reason is that, like always, I have now about 10 things I want to get done with the script 
 for which I would have no time to actually do - while now, all I need to do is ask the contractor and he would gladly do them for me - its his own code - and by now he understands better what I mean/want etc.
 
-
-Here is the script produced by the contractor called [Yuan](https://www.odesk.com/users/~0176b4c06b81285630?sid=28001)
-
-Here is the script by  the contractor named Stanislav ([profile](https://www.odesk.com/users/~018d29cf303df3dafd?sid=28001))
