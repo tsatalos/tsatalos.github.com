@@ -1,0 +1,137 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.1.5
+-- Dumped by pg_dump version 9.1.5
+-- Started on 2012-09-09 22:33:50 YEKT
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 163 (class 3079 OID 11685)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 1904 (class 0 OID 0)
+-- Dependencies: 163
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 162 (class 1259 OID 16387)
+-- Dependencies: 5
+-- Name: test; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE test (
+    id integer NOT NULL,
+    foo character varying,
+    bar character varying,
+    baz character varying
+);
+
+
+ALTER TABLE public.test OWNER TO postgres;
+
+--
+-- TOC entry 161 (class 1259 OID 16385)
+-- Dependencies: 5 162
+-- Name: test_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE test_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.test_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1905 (class 0 OID 0)
+-- Dependencies: 161
+-- Name: test_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE test_id_seq OWNED BY test.id;
+
+
+--
+-- TOC entry 1906 (class 0 OID 0)
+-- Dependencies: 161
+-- Name: test_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('test_id_seq', 3, true);
+
+
+--
+-- TOC entry 1893 (class 2604 OID 16390)
+-- Dependencies: 161 162 162
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY test ALTER COLUMN id SET DEFAULT nextval('test_id_seq'::regclass);
+
+
+--
+-- TOC entry 1896 (class 0 OID 16387)
+-- Dependencies: 162 1897
+-- Data for Name: test; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY test (id, foo, bar, baz) FROM stdin;
+1	some foo 1	some bar 1	some baz 1
+2	some foo 2	some bar 2	some baz 2
+3	some foo 3	some bar 2	some baz 2
+\.
+
+
+--
+-- TOC entry 1895 (class 2606 OID 16395)
+-- Dependencies: 162 162 1898
+-- Name: pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY test
+    ADD CONSTRAINT pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1903 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2012-09-09 22:33:50 YEKT
+
+--
+-- PostgreSQL database dump complete
+--
+

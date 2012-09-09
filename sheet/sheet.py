@@ -1,0 +1,113 @@
+#!/usr/bin/env python
+import os
+import sys
+import optparse
+sys.path[0:0] = (os.path.normpath(os.path.dirname(__file__) +
+                                  os.path.sep + 'burnash-gspread-35913a0'),)
+import gspread  # https://github.com/burnash/gspread
+
+
+def parse_command_line():
+    parser = optparse.OptionParser(description="A simple python script that "
+                                               "replaces the contents of a "
+                                               "google spreadsheet worksheet "
+                                               "with the results of db query")
+    parser.add_option("-t", "--type", dest="dbtype",
+                      choices=('mysql', 'pg'),
+                      help="database type: mysql or pg")
+    parser.add_option("-o", "--host", dest="dbhost",
+                      help="database host")
+    parser.add_option("-r", "--port", dest="dbport",
+                      help="database port")
+    parser.add_option("-u", "--user", dest="dbuser",
+                      help="database user")
+    parser.add_option("-p", "--password", dest="dbpassword",
+                      help="database password")
+    parser.add_option("-n", "--name", dest="dbname",
+                      help="database name")
+    parser.add_option("-q", "--query", dest="dbquery",
+                      help="database query")
+    parser.add_option("-g", "--guser", dest="guser",
+                      help="google user")
+    parser.add_option("-d", "--gpassword", dest="gpassword",
+                      help="google user")
+    parser.add_option("-s", "--surl", dest="spreadsheet_url",
+                      help="spreadsheet url")
+    parser.add_option("-w", "--wname", dest="worksheet_name",
+                      help="worksheet name")
+    parser.add_option("-v", "--verbose", dest="verbose",
+                      help="show processing progress messages")
+    parser.add_option("-x", dest="x", help="x coordinate of starting cell")
+    parser.add_option("-y", dest="y", help="y coordinate of starting cell")
+
+    # -> UPDATE DEFAULT VALUES HERE <-
+    parser.set_defaults(dbtype='mysql', dbhost='localhost',
+                        dbport=3306, dbuser='root',
+                        dbpassword='', dbname='test',
+                        dbquery='SELECT foo, bar, baz FROM test;',
+                        guser='GOOGLE USER', gpassword='GOOGLE PASSWORD',
+                        spreadsheet_url='SPREADSHEET URL',
+                        worksheet_name='test', verbose=False,
+                        x=1, y=1)
+
+    (options, args) = parser.parse_args()
+    return vars(options)
+
+
+def connect(options):
+    connection = None
+    if options['dbtype'] == 'mysql':
+        import MySQLdb
+        import MySQLdb.cursors
+        connection = MySQLdb.connect(host=options['dbhost'],
+                                     port=options['dbport'],
+                                     user=options['dbuser'],
+                                     passwd=options['dbpassword'],
+                                     db=options['dbname'],
+                                     cursorclass=MySQLdb.cursors.SSCursor)
+        if options['verbose']:
+            print "Connected to MySQL database"
+    elif options['dbtype'] == 'pg':
+        import psycopg2
+        connection = psycopg2.connect(host=options['dbhost'],
+                                      port=options['dbport'],
+                                      user=options['dbuser'],
+                                      password=options['dbpassword'],
+                                      database=options['dbname'])
+        if options['verbose']:
+            print "Connected to PostgreSQL database"
+
+    return connection
+
+
+def from_database_to_google_spreadsheet(options, connection):
+    gc = gspread.login(options['guser'], options['gpassword'])
+    spreadsheet = gc.open_by_url(options['spreadsheet_url'])
+    if options['verbose']:
+        print "Spreadsheet is opened"
+    worksheet = spreadsheet.worksheet(options['worksheet_name'])
+    if options['verbose']:
+        print "Worksheet is opened"
+    cursor = connection.cursor()
+    cursor.execute(options['dbquery'])
+    start_row = options['y']
+    dbrow = cursor.fetchone()
+    while dbrow is not None:
+        if options['verbose']:
+            print "Writing row %d" % start_row
+        start_column = options['x']
+        for value in dbrow:
+            worksheet.update_cell(start_row, start_column, value)
+            start_column += 1
+        dbrow = cursor.fetchone()
+        start_row += 1
+    cursor.close()
+    connection.close()
+    if options['verbose']:
+        print "Job is done"
+
+
+if __name__ == '__main__':
+    options = parse_command_line()
+    connection = connect(options)
+    from_database_to_google_spreadsheet(options, connection)
