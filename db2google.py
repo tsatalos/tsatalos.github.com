@@ -1,0 +1,68 @@
+#!/usr/bin/python
+#Tested on Python 2.6
+#Dependencies:
+#Google Data Api for Python. Available @ http://pypi.python.org/pypi/gdata
+#psycopg2. Available @ http://www.initd.org/psycopg/download
+#MySQLdb. Availabe @ http://mysql-python.sourceforge.net
+
+import gdata.docs
+import gdata.docs.service
+import gdata.spreadsheet.service
+
+DATABASE = 'mysql' # currently support postgresql or mysql
+dbhost = '127.0.0.1'
+dbport = 3306
+dbname = 'mytestdb'
+dbuser = 'user'
+dbpassword = 'pass'
+dbquery = 'select * from places;'
+
+google_user = 'some_user@gmail.com'
+google_passwd = "1234thisisnotapass"
+spreadsheet_key = '0At_gOKJHHGFDHGFJHGKJHLJLKJLJLKJLKJKHeEVIVHc'
+worksheet_name = 'Test1'
+where_row = 6
+where_col = 2
+
+if DATABASE == 'postgresql':
+    import psycopg2
+    print "Connecting to postgresql database ..."
+    conn = psycopg2.connect(host=dbhost, port=dbport, database=dbname,
+     user=dbuser, password=dbpassword)
+elif DATABASE == 'mysql':
+    import MySQLdb
+    print "Connecting to mysql database ..."
+    conn = MySQLdb.connect(host=dbhost, port=dbport, db=dbname, user=dbuser,
+     passwd=dbpassword)
+
+
+cur = conn.cursor()
+print "Connected!"
+print "Retrieving data ..."
+cur.execute(dbquery)
+data = list(cur.fetchall())
+data.insert(0, tuple([_[0] for _ in cur.description]))
+data = tuple(data)
+print "Data successfully fetched!"
+
+print "Connecting to google spreadsheet ..."
+gd_client = gdata.spreadsheet.service.SpreadsheetsService()
+gd_client.email = google_user
+gd_client.password = google_passwd
+gd_client.ProgrammaticLogin()
+q = gdata.spreadsheet.service.DocumentQuery()
+q.title = worksheet_name
+feed = gd_client.GetWorksheetsFeed(spreadsheet_key, query=q)
+worksheet_id = feed.entry[0].id.text.rsplit('/',1)[1]
+print "Connected!"
+
+print "Writing data to Google Spreadsheet ..."
+rownum = where_row
+for line in data:
+    colnum = where_col
+    for cell in line:
+        gd_client.UpdateCell(row=rownum, col=colnum, inputValue=str(cell), 
+         key=spreadsheet_key, wksht_id=worksheet_id)
+        colnum += 1
+    rownum += 1
+print "Done!"
