@@ -16,8 +16,7 @@ The code is at the bottom of this post as well as a link to the script if you wa
 
 For anyone interested to hear about how this code micro-tasking effort worked out, read on.
 
-* At 4pm I sat to convert my own notes to a $10 fixed price job post - the job was posted by 4:30pm.
-Here is the [job post](https://www.odesk.com/jobs/Small-python-program-that-uses-google-spreadsheet-api_~~ffec771ecb20b4bb)
+* At 4pm yesterday, I sat to convert my own notes to a $10 fixed price job post - the job was posted by 4:30pm.  Here is the [job post](https://www.odesk.com/jobs/Small-python-program-that-uses-google-spreadsheet-api_~~ffec771ecb20b4bb)
 I created. 
 
 * By 6pm I had gone through all the markeplaces that advertise themselves that they focus on small projects - fiverr, vworker, freelancer and peopleperhour.
@@ -28,9 +27,9 @@ I created.
   - vworker - very non-obvious interface - I posted the job eventually the job stayed hidden for another 8-9hrs (I was a new account...) - i closed the job after 20 hrs with no bids.
 [Here](http://www.vworker.com/RentACoder/misc/BidRequests/ShowBidRequest.asp?lngBidRequestId=1960405)  is that job post
 
-* By 4am I had received 4 applicants all practically new to odesk but with tests - and appearing python comfortable  (couldn't find the actual time they applied)
-* By 8:30am (when I woke up) I hired three out of four applicants and closed the job.
-* By 9:00 am I send the following message to all the hires - explaining them the rules and asking them to connect with me on skype 
+* By 4am this morning I had received 4 applicants all practically new to odesk but with tests - and all appearing python comfortable  (couldn't find the actual time they applied)
+* By 8:30am (when I woke up) I hired three out of four applicants and closed the job. No interviewing just a quick look at what they told me in the message center - and how confident they looked about doing the job.
+* By 9:00 am I sent the following message to all the hires - explaining them the rules and asking them to connect with me on skype 
 
 	Hi all and welcome, 
 
@@ -47,9 +46,9 @@ I created.
 
 and left for a family thing, keeping an eye on skype to accept any incoming contact request.
 
-* At 11:00am I resumed reconnected with 2 candidtes, spending 30 mins explaining questions to the contractor from Ukraine - who after that took off (equiv to 10pm for him). I continued with the other contractor (US timezone)
-answering questions and working on parallel
-* At 2pm approximately after 2hrs of work from that candidate I got the first result. We proceeded in back and forths resolving problems withthe delivable (not all types were handled correctly, misunderstandings (lack of headers, no handling of spreadsheet tabs  etc)
+* At 11:00am I resumed, connecting over skype with 2 of the hires, spending 30 mins explaining questions to the contractor from Ukraine - who after that took off (equiv to 10pm for him). I continued with the other contractor (US timezone)
+answering questions and working on other stuff on parallel with the skype.
+* At 2pm approximately after 2hrs of work from that candidate I got the first result. We proceeded in back and forths resolving problems with the delivable (not all types were handled correctly, misunderstandings (lack of headers, no handling of spreadsheet tabs  etc))
 * At 3:30pm approximately 24 hours after I sat to do the original post and after approximately 4 hrs of my own time and 3-4 hrs of one contractor I had the outcome I was looking for
 
 Summary, I feel very happy and successful in spite of the apparent inbalance between effort invested and return. The reason is that, like always, I have now about 10 things I want to get done with the script 
