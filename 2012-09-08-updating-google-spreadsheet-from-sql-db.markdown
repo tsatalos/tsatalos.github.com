@@ -55,7 +55,7 @@ Summary, I feel very happy and successful in spite of the apparent inbalance bet
 for which I would have no time to actually do - while now, all I need to do is ask the contractor and he would gladly do them for me - its his own code - and by now he understands better what I mean/want etc.
 
 
-Here is the [script file](db2google.py) produced by the contractor called [Yuan](https://www.odesk.com/users/~0176b4c06b81285630?sid=28001)
+Here is the [script file](sheet/db2google.py) produced by the contractor called [Yuan](https://www.odesk.com/users/~0176b4c06b81285630?sid=28001)
 
 <pre>
 #!/usr/bin/python
