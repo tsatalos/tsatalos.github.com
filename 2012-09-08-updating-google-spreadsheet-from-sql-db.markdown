@@ -58,7 +58,7 @@ answering questions and working on other stuff on parallel with the skype.
   - and never asked anything with regards my own time !
   - self contained with enclosed the gspread library.
   - total lines of code excluding the command line parsing function 20 of which 10 is doing logging - in case you chose the -verbose option!!
-He gave me his skype contact only after he submitted his full answer!. ([python script](sheet/sheet.py), [mysql test](sheet/mysql_test.sql), [pg test](sheet/pg_test), [readme](README.txt) )
+He gave me his skype contact only after he submitted his full answer!. ([python script](sheet/sheet.py), [mysql test](sheet/mysql_test.sql), [pg test](sheet/pg_test), [readme](sheet/README.txt) )
 
 Summary, I feel very happy and successful in spite of the apparent inbalance between effort invested and return. The reason is that, like always, I have now about 10 things I want to get done with the script 
 for which I would have no time to actually do - while now, all I need to do is ask the contractor and he would gladly do them for me - its his own code - and by now he understands better what I mean/want etc.
