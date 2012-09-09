@@ -1,5 +1,5 @@
 ---
-title: Updating a google spreadsheet from an sql database using a python script
+title: Updating a google spreadsheet from an sql and an experience in code microtasking
 date: 2012-09-01
 ---
 
@@ -13,7 +13,15 @@ It gets as input
 
 and it goes ahead executes the query fetches the data and "pastes" them on the google spreadsheet.
 
-Here is the [script file](db2google.py)
+Here is the [job post](https://www.odesk.com/jobs/Small-python-program-that-uses-google-spreadsheet-api_~~ffec771ecb20b4bb)
+I created. I actually gave the task as a $10 task to 3 people that applied to my job (3 out of 4 candidates)
+
+From the time that I sat to post the job to the time I had the solution to my hands ... approximately 18 hours. I invested approximately 2+ hours or my own time
+in creating the job in varoious marketplaces as well as helping the candidate. I did try rentacoder/vworker ([here](http://www.vworker.com/RentACoder/misc/BidRequests/ShowBidRequest.asp?lngBidRequestId=1960405) is the post
+and closed the job after 24 hours with no bids, freelancer - where I was denied the opportunity to post the job because it was under the $30 minimum, and peopleperhour where I was denied because
+I was below the minimum $50 budget.
+
+Here is the [script file](db2google.py) produced by the contractor called [Yuan](https://www.odesk.com/users/~0176b4c06b81285630?sid=28001)
 
 <pre>
 #!/usr/bin/python
