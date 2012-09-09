@@ -13,6 +13,6 @@ It gets as input
 
 and it goes ahead executes the query fetches the data and "pastes" them on the google spreadsheet.
 
-Here is the [script file](sql2google.py)
+Here is the [script file](db2google.py)
 <pre>
 </pre>
