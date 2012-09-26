@@ -64,4 +64,4 @@ He gave me his skype contact only after he submitted his full answer!. ([Contrac
 Summary, I feel very happy and successful with each one of the contractors, in spite of the apparent inbalance between effort invested and return. The reason is that, 
 * like always, I have now about 10 things I want to get done with the script for which I would have no time to actually do - while now, all I need to do is ask the contractor and he would gladly do them for me - its his own code - and by now he understands better what I mean/want etc.
 * I have found at least one python developer whose skills significantly outmatch my own, whose interface is compatible with mine and thus requires minimal communication overhead and is at the price range that I can afford to pay
- 
+* If you are interested in the most recent version of the python script that does the upload (including some corrections that followed the initial delivery), [here it is](sheet/final_script.py.txt).
